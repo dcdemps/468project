@@ -18,3 +18,4 @@ docker build -t IMAGE_NAME .
 ## command to run image
 
 sudo docker run -itd --rm -v ${PWD}:/webui -v /webui/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true IMAGE_NAME
+
