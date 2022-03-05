@@ -17,12 +17,12 @@ docker build -t IMAGE_NAME .
 
 ## command to run image
 
-sudo docker run \<br/>
-	-itd \<br/>
-	--rm \<br/>
-	-v ${PWD}:/webui \<br/>
-	-v /webui/node_modules \<br/>
-	-p 3001:3000 \<br/>
-	-e CHOKIDAR_USEPOLLING=true \<br/>
-	IMAGE_NAME
+sudo docker run \  <br/>
+	-itd \  <br/>
+	--rm \  <br/>
+	-v ${PWD}:/webui \  <br/>
+	-v /webui/node_modules \  <br/>
+	-p 3001:3000 \  <br/>
+	-e CHOKIDAR_USEPOLLING=true \  <br/>
+	test_austin
 
