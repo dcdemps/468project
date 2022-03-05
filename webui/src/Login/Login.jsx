@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import "./style.css";
+import "../style.css";
 
-function App() {
+const Login = () => {
   // States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -80,6 +79,4 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
-export default App;
+export default Login;
