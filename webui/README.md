@@ -24,5 +24,4 @@ sudo docker run \  <br/>
 	-v /webui/node_modules \  <br/>
 	-p 3001:3000 \  <br/>
 	-e CHOKIDAR_USEPOLLING=true \  <br/>
-	test_austin
-
+	IMAGE_NAME
