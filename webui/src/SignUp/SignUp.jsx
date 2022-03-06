@@ -6,39 +6,33 @@ const Login = () => {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // temp info, will replace with link to actual database
-  const database = [
-    { username: "test",
-      password: "pwtest" },
-    { username: "test2",
-      password: "pwtest2" }
-  ];
-
   const errors = {
     usernameError: "invalid username",
-    passwordError: "invalid password"
+    passwordError: "passwords do not match"
   };
 
   const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
 
-    var { usernameError, passwordError } = document.forms[0];
+    var { username, passwordOne, passwordTwo } = document.forms[0];
 
-    // Find user login info
-    const userData = database.find((user) => user.username === usernameError.value);
+    // TODO: check if username is valid
+    // if (username !== validUsername) {
+      // setErrorMessages({ name: "usernameError", message: errors.usernameError });
+    // }
 
-    // Compare user info
-    if (userData) {
-      if (userData.password !== passwordError.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.passwordError });
-      } else {
-        setIsSubmitted(true);
-      }
+    if (passwordOne.value !== passwordTwo.value) {
+      setErrorMessages({ name: "passwordError", message: errors.passwordError });
     } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.usernameError });
+      console.log("----------------------------");
+      console.log("UserData submitted:");
+      console.log("Username: " + username.value)
+      console.log("PasswordOne: " + passwordTwo.value)
+      console.log("PasswordTwo: " + passwordOne.value)
+      console.log("----------------------------");
+      setIsSubmitted(true);
+      // TODO: if username is valid and passwords match add new user to database
     }
   };
 
@@ -53,23 +47,33 @@ const Login = () => {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username </label>
-          <input type="text" name="usernameError" required />
-          {renderErrorMessage("usernameError")}
+
+          <label> Username </label>
+          <input type="text" name="username" required />
+          {
+            renderErrorMessage("usernameError")
+          }
+
         </div>
         <div className="input-container">
-          <label>Password </label>
-          <input type="password" name="passwordError" required />
-          {renderErrorMessage("passwordError")}
+
+          <label> Password </label>
+          <input type="password" name="passwordOne" required />
+
+        </div>
+        <div className="input-container">
+
+          <label> Enter Password Again  </label>
+          <input type="password" name="passwordTwo" required />
+          {
+            renderErrorMessage("passwordError")
+          }
+
         </div>
         <div className="button-container">
+
           <input type="submit" />
-        </div>
-        <div className="button-container">
-          <input type="submit" />
-        </div>
-        <div className="button-container">
-          <input type="submit" />
+
         </div>
       </form>
     </div>
@@ -78,8 +82,8 @@ const Login = () => {
   return (
     <div className="app">
       <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>Success</div> : renderLoginForm}
+        <div className="title">Sign Up</div>
+        {isSubmitted ? <div>🚀🚀🚀Success🚀🚀🚀</div> : renderLoginForm}
       </div>
     </div>
   );
