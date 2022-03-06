@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Login.css";
+import "./SignUp.css";
 
 const Login = () => {
   // States
@@ -63,10 +62,11 @@ const Login = () => {
           <input type="password" name="passwordError" required />
           {renderErrorMessage("passwordError")}
         </div>
-        <div className="sign-up-button">
-          <Link to={"/SignUp"}>
-            Click here to Sign Up  
-          </Link>
+        <div className="button-container">
+          <input type="submit" />
+        </div>
+        <div className="button-container">
+          <input type="submit" />
         </div>
         <div className="button-container">
           <input type="submit" />
