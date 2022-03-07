@@ -7,6 +7,7 @@ import {
 
 import Login from "./Login/Login"
 import SignUp from "./SignUp/SignUp"
+import Account from "./AccountSummary/Account"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Routes >
           <Route path="/" element={<Login/>} />
           <Route path="/SignUp" element={<SignUp/>} />
+          <Route path="/Account" element={<Account/>}/>
         </Routes >
     </Router>
   );
