@@ -17,7 +17,7 @@ const Account = () =>{
 
 
           <div className = "acc-title"> Savings: </div>
-          //savings from database
+          [//savings from database]
           <div className = "saving-balance">
             <input readOnly value={"$20"} />
           </div>
@@ -25,7 +25,7 @@ const Account = () =>{
 
 
           <div className = "acc-title">Checking: </div>
-            //checkings from database
+            [//checkings from database]
             <div className = "checking-balance">
             <input readOnly value={"$20"} />
           </div>
