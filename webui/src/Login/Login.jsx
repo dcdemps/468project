@@ -1,34 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 
-const Login = () => {
+export default class Login extends React.Component {
   // States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      password: '',
+      error: {},
+      isSubmitted: false
+    };
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit= this.handleSubmit.bind(this)
+  }
 
-  // temp info, will replace with link to actual database
-  const database = [
-    { username: "test",
-      password: "1234" },
-    { username: "test",
-      password: "pwtest" },
-    { username: "test2",
-      password: "pwtest2" }
-  ];
-
-  const errors = {
-    usernameError: "invalid username",
-    passwordError: "invalid password"
-  };
-
-  const handleSubmit = (event) => {
+  handleSubmit(event) {
     //Prevent page reload
     event.preventDefault();
 
-    var { username, password } = document.forms[0];
+      const database = [
+        { username: "test",
+          password: "1234" },
+        { username: "test",
+          password: "pwtest" },
+        { username: "test2",
+          password: "pwtest2" }
+      ];
 
-    // Find user login info
     /**
      * TODO: this is broken when usernames are the same.
      * 
@@ -51,7 +51,7 @@ const Login = () => {
      *  it will have to get changed when we introduce the database
      */
 
-    var databaseTest = database.map(x => (x.username === username.value) ? true : false)
+    var databaseTest = database.map(x => (x.username === this.state.username) ? true : false)
 
     // Checks if username is in database
     if (databaseTest.includes(true)) {
@@ -60,58 +60,75 @@ const Login = () => {
       var usernameIndex = databaseTest.indexOf(true)
 
       // Checks if password is in database
-      if (database[usernameIndex]["password"] !== password.value) {
-        setErrorMessages({ name: "passwordError", message: errors.passwordError });
+      if (database[usernameIndex]["password"] !== this.state.password) {
+        this.setState({ 
+          error: {name: "passwordError", message: "invalid password"}
+        });
       } else {
-        setIsSubmitted(true);
+        this.setState({
+          isSubmitted: true
+        });
       }
 
     } else {
-      setErrorMessages({ name: "usernameError", message: errors.usernameError });
+      this.setState({ 
+        error: { name: "usernameError", message: "invalid username" }
+      });
     }
     
   };
 
-  // Generate code error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value}
     );
+  }
 
+  // Generate code error message
+  renderErrorMessage(name) {
+    if(name === this.state.error.name) {
+      return (
+        <div className="error">{this.state.error.message}</div>
+      );
+    }
+  }
+   
   //login form
-  const renderLoginForm = (
-    <div className="form">
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label>Username </label>
-          <input type="text" name="username" required />
-          {renderErrorMessage("usernameError")}
-        </div>
-        <div className="input-container">
-          <label>Password </label>
-          <input type="password" name="password" required />
-          {renderErrorMessage("passwordError")}
-        </div>
-        <div className="sign-up-button">
-          <Link to={"/SignUp"}>
-            Click here to Sign Up  
-          </Link>
-        </div>
-        <div className="button-container">
-          <input type="submit" />
-        </div>
-      </form>
-    </div>
-  );
-
-  return (
-    <div className="app">
-      <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>Success</div> : renderLoginForm}
+  renderLoginForm() {
+    return (
+      <div className="form">
+        <form onSubmit={this.handleSubmit}>
+          <div className="input-container">
+            <label>Username </label>
+            <input type="text" name="username" value={this.state.username} onChange={this.handleChange} required />
+            {this.renderErrorMessage("usernameError")}
+          </div>
+          <div className="input-container">
+            <label>Password </label>
+            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+            {this.renderErrorMessage("passwordError")}
+          </div>
+          <div className="sign-up-button">
+            <Link to={"/SignUp"}>
+              Click here to Sign Up  
+            </Link>
+          </div>
+          <div className="button-container">
+            <input type="submit" />
+          </div>
+        </form>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-export default Login;
+  render() {
+    return (
+      <div className="app">
+        <div className="login-form">
+          <div className="title">Sign In</div>
+          {this.state.isSubmitted ? <div>Success</div> : this.renderLoginForm()}
+        </div>
+      </div>
+    );
+  }
+}
