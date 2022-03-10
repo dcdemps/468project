@@ -44,7 +44,7 @@ export default class Account extends React.Component {
               
           </div>
 
-          <div classNames = "buttons">
+          <div className = "buttons">
             <Link to ="/Deposit">
               <button>
                 <label>Deposit</label>  
