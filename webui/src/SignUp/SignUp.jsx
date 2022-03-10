@@ -61,53 +61,55 @@ export default class SignUp extends React.Component {
 
   //login form
   renderLoginForm() {
-    <div className="form">
-      <form onSubmit={this.handleSubmit}>
-        <div className="input-container">
+    return (
+      <div className="form">
+        <form onSubmit={this.handleSubmit}>
+          <div className="input-container">
 
-          <label> Username </label>
-          <input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            required
-          />
-          { this.renderErrorMessage("usernameError") }
+            <label> Username </label>
+            <input
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+              required
+            />
+            { this.renderErrorMessage("usernameError") }
 
-        </div>
-        <div className="input-container">
+          </div>
+          <div className="input-container">
 
-          <label> Password </label>
-          <input
-            type="password"
-            name="passwordOne"
-            value={this.state.passwordOne}
-            onChange={this.handleChange}
-            required
-          />
+            <label> Password </label>
+            <input
+              type="password"
+              name="passwordOne"
+              value={this.state.passwordOne}
+              onChange={this.handleChange}
+              required
+            />
 
-        </div>
-        <div className="input-container">
+          </div>
+          <div className="input-container">
 
-          <label> Enter Password Again  </label>
-          <input 
-            type="password"
-            name="passwordTwo"
-            value={this.state.passwordTwo}
-            onChange={this.handleChange}
-            required
-          />
-          { this.renderErrorMessage("passwordError") }
+            <label> Enter Password Again  </label>
+            <input 
+              type="password"
+              name="passwordTwo"
+              value={this.state.passwordTwo}
+              onChange={this.handleChange}
+              required
+            />
+            { this.renderErrorMessage("passwordError") }
 
-        </div>
-        <div className="button-container">
+          </div>
+          <div className="button-container">
 
-          <input type="submit" />
+            <input type="submit" />
 
-        </div>
-      </form>
-    </div>
+          </div>
+        </form>
+      </div>
+    )
   }
 
   render() {
@@ -115,7 +117,9 @@ export default class SignUp extends React.Component {
       <div className="app">
         <div className="login-form">
           <div className="title">Sign Up</div>
-          {this.isSubmitted ? <div>🚀🚀🚀Success🚀🚀🚀</div> : this.renderLoginForm()}
+          {
+            this.state.isSubmitted ? <div>🚀🚀🚀Success🚀🚀🚀</div> : this.renderLoginForm()
+          }
         </div>
       </div>
     );
