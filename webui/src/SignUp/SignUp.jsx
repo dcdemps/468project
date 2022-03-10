@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SignUp.css";
 
-const Login = () => {
+export default class SignUp extends React.Component {
   // States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      passwordOne: '',
+      passwordTwo: '',
+      error: {},
+      isSubmitted: false
+    };
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit= this.handleSubmit.bind(this)
+  }
 
-  const errors = {
-    usernameError: "invalid username",
-    passwordError: "passwords do not match"
-  };
 
-  const handleSubmit = (event) => {
+  handleSubmit(event) {
     //Prevent page reload
     event.preventDefault();
 
@@ -23,7 +29,9 @@ const Login = () => {
     // }
 
     if (passwordOne.value !== passwordTwo.value) {
-      setErrorMessages({ name: "passwordError", message: errors.passwordError });
+      this.setState({ 
+        error: {name: "passwordError", message: "The passwords do not match"}
+      });
     } else {
       console.log("----------------------------");
       console.log("UserData submitted:");
@@ -31,43 +39,66 @@ const Login = () => {
       console.log("PasswordOne: " + passwordTwo.value)
       console.log("PasswordTwo: " + passwordOne.value)
       console.log("----------------------------");
-      setIsSubmitted(true);
+      this.setIsSubmitted(true);
       // TODO: if username is valid and passwords match add new user to database
     }
-  };
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value}
+    );
+  }
 
   // Generate code error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
+  renderErrorMessage(name) {
+    if(name === this.state.error.name) {
+      return (
+        <div className="error">{this.state.error.message}</div>
+      );
+    }
+  }
 
   //login form
-  const renderLoginForm = (
+  renderLoginForm() {
     <div className="form">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <div className="input-container">
 
           <label> Username </label>
-          <input type="text" name="username" required />
-          {
-            renderErrorMessage("usernameError")
-          }
+          <input
+            type="text"
+            name="username"
+            value={this.state.username}
+            onChange={this.handleChange}
+            required
+          />
+          { this.renderErrorMessage("usernameError") }
 
         </div>
         <div className="input-container">
 
           <label> Password </label>
-          <input type="password" name="passwordOne" required />
+          <input
+            type="password"
+            name="passwordOne"
+            value={this.state.passwordOne}
+            onChange={this.handleChange}
+            required
+          />
 
         </div>
         <div className="input-container">
 
           <label> Enter Password Again  </label>
-          <input type="password" name="passwordTwo" required />
-          {
-            renderErrorMessage("passwordError")
-          }
+          <input 
+            type="password"
+            name="passwordTwo"
+            value={this.state.passwordTwo}
+            onChange={this.handleChange}
+            required
+          />
+          { this.renderErrorMessage("passwordError") }
 
         </div>
         <div className="button-container">
@@ -77,16 +108,16 @@ const Login = () => {
         </div>
       </form>
     </div>
-  );
+  }
 
-  return (
-    <div className="app">
-      <div className="login-form">
-        <div className="title">Sign Up</div>
-        {isSubmitted ? <div>🚀🚀🚀Success🚀🚀🚀</div> : renderLoginForm}
+  render() {
+    return (
+      <div className="app">
+        <div className="login-form">
+          <div className="title">Sign Up</div>
+          {this.isSubmitted ? <div>🚀🚀🚀Success🚀🚀🚀</div> : this.renderLoginForm()}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default Login;
