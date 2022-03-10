@@ -16,7 +16,7 @@ export default class Withdraw extends React.Component {
 
   
   //TODO: Change handleSubmit to interact with database
-  
+
   handleSubmit(event) {
     //Prevent page reload
     event.preventDefault();
@@ -40,7 +40,7 @@ export default class Withdraw extends React.Component {
           <div className="login-form">
             
             <div className = "title">
-              Deposit,
+              Withdraw,
             </div>
 
             <div className = "acc-title">Enter amount to Withdraw: </div>
