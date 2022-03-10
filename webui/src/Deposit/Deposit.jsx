@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Deposit.css";
 
 export default class Deposit extends React.Component {
@@ -50,6 +51,12 @@ export default class Deposit extends React.Component {
                 value={this.state.depositAmount}
                 onChange={this.handleChange}
               />
+            </div>
+
+            <div className="sign-up-button">
+              <Link to={"/Account"}>
+                Account Overview  
+              </Link>
             </div>
 
             <div className = "buttons">
