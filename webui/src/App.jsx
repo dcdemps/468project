@@ -9,6 +9,7 @@ import Login from "./Login/Login"
 import SignUp from "./SignUp/SignUp"
 import Account from "./AccountSummary/Account"
 import Deposit from "./Deposit/Deposit";
+import Withdraw from "./Withdraw/Withdraw";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/SignUp" element={<SignUp/>}/>
           <Route path="/Account" element={<Account/>}/>
           <Route path="/Deposit" element={<Deposit/>}/>
+          <Route path="/Withdraw" element={<Withdraw/>}/>
         </Routes>
     </Router>
   );
