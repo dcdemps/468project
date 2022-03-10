@@ -18,6 +18,8 @@ router.post('/create', (request, response) => {
 		} catch (error) {
 			console.log(error);
 		}
+	} else {
+		console.log('Request does not have a username and password. No new user created');
 	}
 });
 

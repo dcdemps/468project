@@ -17,29 +17,42 @@ export default class SignUp extends React.Component {
   }
 
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     //Prevent page reload
     event.preventDefault();
-
-    var { username, passwordOne, passwordTwo } = document.forms[0];
 
     // TODO: check if username is valid
     // if (username !== validUsername) {
       // setErrorMessages({ name: "usernameError", message: errors.usernameError });
     // }
 
-    if (passwordOne.value !== passwordTwo.value) {
+    const url = "http://localhost:3001/users/create";
+
+
+
+
+
+    if (this.state.passwordOne !== this.state.passwordTwo) {
       this.setState({ 
         error: {name: "passwordError", message: "The passwords do not match"}
       });
     } else {
+      await fetch(url, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify({
+          username: this.state.username,
+          password: this.state.passwordOne
+        })
+      });
+
       console.log("----------------------------");
       console.log("UserData submitted:");
-      console.log("Username: " + username.value)
-      console.log("PasswordOne: " + passwordTwo.value)
-      console.log("PasswordTwo: " + passwordOne.value)
+      console.log("Username: " + this.state.username)
+      console.log("PasswordOne: " + this.state.passwordOne)
+      console.log("PasswordTwo: " + this.state.passwordTwo)
       console.log("----------------------------");
-      this.setIsSubmitted(true);
+      this.setState({ isSubmitted: true});
       // TODO: if username is valid and passwords match add new user to database
     }
   }
