@@ -95,9 +95,9 @@ To get a local copy of the project up and running follow these steps.
    ```sh
    git clone https://github.com/dcdemps/468project.git
    ```
-2. Install NPM packages
+2. Run the docker command
    ```sh
-   docker-compose up
+   docker-compose up --detach
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
