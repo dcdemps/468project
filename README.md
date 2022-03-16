@@ -135,6 +135,7 @@ Project Link: [https://github.com/dcdemps/468project](https://github.com/dcdemps
 * [React Router](https://v5.reactrouter.com/)
 * [MySQL2](https://www.npmjs.com/package/mysql2)
 * [Nodemon](https://www.npmjs.com/package/nodemon)
+* [User Authentication](https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
