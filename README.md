@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/dcdemps/468project">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo" width="300" height="168">
   </a>
 
   <h3 align="center">Banking Application</h3>
@@ -52,7 +52,7 @@
 ## About The Project
 
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Account Page Screen Shot][product-screenshot]](https://example.com)
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
@@ -146,3 +146,4 @@ Project Link: [https://github.com/dcdemps/468project](https://github.com/dcdemps
 [contributors-url]: https://github.com/dcdemps/468project/graphs/contributors
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linktree-url]: https://linktr.ee/roaming432
+[product-screenshot]: images/screenshot.png
