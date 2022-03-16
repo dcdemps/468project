@@ -33,6 +33,9 @@ export default class Login extends React.Component {
     //Prevent page reload
     event.preventDefault();
 
+
+    // TODO: Check if user is actually in database
+
     const username = this.state.username;
     const password = this.state.password;
 
@@ -42,7 +45,6 @@ export default class Login extends React.Component {
     });
 
     this.props.setToken(token);
-
   };
 
   handleChange(event) {

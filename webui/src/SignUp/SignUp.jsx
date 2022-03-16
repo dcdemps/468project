@@ -77,12 +77,12 @@ export default class SignUp extends React.Component {
       console.log("PasswordTwo: " + this.state.passwordTwo)
       console.log("----------------------------");
 
+
       this.setState({ isSubmitted: true});
 
       const token = await this.loginUser(credentials);
   
       this.props.setToken(token);
-      // TODO: if username is valid and passwords match add new user to database
     }
   }
 
@@ -159,8 +159,11 @@ export default class SignUp extends React.Component {
       <div className="app">
         <div className="login-form">
           {
-            this.state.isSubmitted ? 
+            this.state.isSubmitted ?
+            <>
               <Navigate to={'/'}/>
+            </>
+              
             :
             <>
               <div className="title">Sign Up</div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Routes,
   Route
@@ -10,11 +10,13 @@ import Account from "./AccountSummary/Account"
 import Deposit from "./Deposit/Deposit";
 import Withdraw from "./Withdraw/Withdraw";
 import Transfer from "./Transfer/Transfer";
+import useToken from "./Hooks/useToken";
 
 function App() {
 
-  const [token, setToken] = useState();
+  const { token, setToken } = useToken();
 
+  console.log(token);
   if(!token) {
     return (
       <Routes>
