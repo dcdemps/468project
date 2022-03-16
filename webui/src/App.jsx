@@ -16,17 +16,21 @@ function App() {
   const [token, setToken] = useState();
 
   if(!token) {
-    return <Login setToken={setToken} />
+    return (
+      <Routes>
+        <Route path="/" element={<Login setToken={setToken} />}/>
+        <Route path="/signup" element={<SignUp setToken={setToken} />}/>
+      </Routes>
+    );
   }
 
   return (
     <Routes>
-      <Route path="/" element={<Login/>}/>
-      <Route path="/SignUp" element={<SignUp/>}/>
-      <Route path="/Account" element={<Account/>}/>
-      <Route path="/Deposit" element={<Deposit/>}/>
-      <Route path="/Withdraw" element={<Withdraw/>}/>
-      <Route path="/Transfer" element={<Transfer/>}/>
+      <Route path="/" element={<Account/>}/>
+      <Route path="/account" element={<Account/>}/>
+      <Route path="/deposit" element={<Deposit/>}/>
+      <Route path="/withdraw" element={<Withdraw/>}/>
+      <Route path="/transfer" element={<Transfer/>}/>
     </Routes>
   );
 }

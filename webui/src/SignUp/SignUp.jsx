@@ -1,4 +1,6 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 import "./SignUp.css";
 
 export default class SignUp extends React.Component {
@@ -12,8 +14,30 @@ export default class SignUp extends React.Component {
       error: {},
       isSubmitted: false
     };
+    this.loginUser= this.loginUser.bind(this)
+    this.signUpUser= this.signUpUser.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit= this.handleSubmit.bind(this)
+  }
+
+  async loginUser(credentials) {
+    return fetch('http://localhost:3001/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+    .then(data => data.json())
+  }
+
+  async signUpUser(credentials) {
+    await fetch('http://localhost:3001/users/create', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" }, 
+      body: JSON.stringify(credentials)
+    })
+    .then(data => data.json())
   }
 
 
@@ -26,7 +50,6 @@ export default class SignUp extends React.Component {
       // setErrorMessages({ name: "usernameError", message: errors.usernameError });
     // }
 
-    const url = "http://localhost:3001/users/create";
 
 
 
@@ -37,14 +60,15 @@ export default class SignUp extends React.Component {
         error: {name: "passwordError", message: "The passwords do not match"}
       });
     } else {
-      await fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" }, 
-        body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.passwordOne
-        })
-      });
+      const username = this.state.username;
+      const password = this.state.passwordOne;
+
+      const credentials = {
+        username,
+        password
+      };
+
+      this.signUpUser(credentials);
 
       console.log("----------------------------");
       console.log("UserData submitted:");
@@ -52,7 +76,12 @@ export default class SignUp extends React.Component {
       console.log("PasswordOne: " + this.state.passwordOne)
       console.log("PasswordTwo: " + this.state.passwordTwo)
       console.log("----------------------------");
+
       this.setState({ isSubmitted: true});
+
+      const token = await this.loginUser(credentials);
+  
+      this.props.setToken(token);
       // TODO: if username is valid and passwords match add new user to database
     }
   }
@@ -129,12 +158,21 @@ export default class SignUp extends React.Component {
     return (
       <div className="app">
         <div className="login-form">
-          <div className="title">Sign Up</div>
           {
-            this.state.isSubmitted ? <div>🚀🚀🚀Success🚀🚀🚀</div> : this.renderLoginForm()
+            this.state.isSubmitted ? 
+              <Navigate to={'/'}/>
+            :
+            <>
+              <div className="title">Sign Up</div>
+              {this.renderLoginForm()}
+            </>
           }
         </div>
       </div>
     );
   }
+}
+
+SignUp.propTypes = {
+  setToken: PropTypes.func.isRequired
 }

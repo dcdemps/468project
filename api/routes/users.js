@@ -9,7 +9,7 @@ router.use((request, response, next) => {
 });
 
 router.post('/create', (request, response) => {
-	console.log(request.body);
+	console.log('User created: ',request.body);
 	const { username, password } = request.body;
 	if (username && password) {
 		try {
