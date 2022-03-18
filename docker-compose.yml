@@ -13,3 +13,20 @@ services:
       - CHOKIDAR_USEPOLLING=true
     stdin_open: true
     tty: true
+
+  db:
+    image: mysql
+    container_name: sql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD='password'
+      - MYSQL_PASSWORD='password'
+      - MYSQL_USER='user'
+      - MYSQL_DATABASE='db'
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'sql_data:/var/lib/mysql'
+
+volumes:
+  sql_data:
