@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  webui:
+    container_name: webui
+    build: ./webui
+    volumes:
+      - './webui:/webui'
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
