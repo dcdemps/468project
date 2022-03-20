@@ -112,7 +112,7 @@ To get a local copy of the project up and running follow these steps.
 	- [] Add API calls for all of the react components
 - [] Add user authentication
 - [] Add Program that adds money to savings accounts
-- [] 
+- [] Add way to transfer money from checking to savings and vice versa
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
