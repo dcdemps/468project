@@ -10,8 +10,8 @@ https://web.postman.co/
 npm install express
 	installs express
 
-npm install mysql2
-	this is for taking to the mysql server
+npm install mssql
+	this is for taking to the sql server
 
 npm install nodemon
 	this if for having the express server restart when you make changes to the files and save

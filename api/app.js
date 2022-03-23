@@ -1,15 +1,20 @@
+const db = require('./dboperations');
+
 const express = require('express');
-
 const cors = require('cors');
-
 const app = express();
-
-app.use(cors());
 
 
 // Need to use when using json
 app.use(express.json());
+app.use(cors());
 
+
+app.get('/', function(request, response) {
+	db.getAll().then(result => {
+		response.json(result)
+	});
+})
 
 app.use('/login', (request, response) => {
 	const token = {
