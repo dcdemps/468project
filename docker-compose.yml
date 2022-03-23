@@ -6,7 +6,9 @@ services:
     container_name: webui
     build: ./webui
     volumes:
-      - './webui:/webui'
+      - type: volume
+        source: webui
+        target: /webui
     ports:
       - 3000:3000
     environment:
@@ -14,19 +16,30 @@ services:
     stdin_open: true
     tty: true
 
-  db:
-    image: mysql
-    container_name: sql
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD='password'
-      - MYSQL_PASSWORD='password'
-      - MYSQL_USER='user'
-      - MYSQL_DATABASE='db'
+  sql-server-db:
+    container_name: sql-server-db
+    build: ./sql
     ports:
-      - '3306:3306'
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: 'password@1'
     volumes:
-      - 'sql_data:/var/lib/mysql'
+      - type: volume
+        source: data
+        target: /var/opt/mssql/
+
+  api:
+    container_name: api
+    build: ./api
+    ports:
+      - 3001:3001
+    volumes:
+      - type: volume
+        source: api
+        target: /api
 
 volumes:
-  sql_data:
+  data:
+  webui:
+  api:
