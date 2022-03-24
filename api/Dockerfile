@@ -10,4 +10,4 @@ RUN npm install -g nodemon && npm install
 
 COPY . /
 
-CMD ["nodemon"]
+CMD ["node"]
