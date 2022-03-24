@@ -14,6 +14,7 @@ npm install mssql
 	this is for taking to the sql server
 
 npm install nodemon
+	For local dev only. Created memory leak when used in docker.  
 	this if for having the express server restart when you make changes to the files and save
 
 npm install cors
