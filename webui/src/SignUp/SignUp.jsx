@@ -80,9 +80,9 @@ export default class SignUp extends React.Component {
 
       this.setState({ isSubmitted: true});
 
-      const token = await this.loginUser(credentials);
+      // const token = await this.loginUser(credentials);
   
-      this.props.setToken(token);
+      // this.props.setToken(token);
     }
   }
 
