@@ -4,6 +4,8 @@ https://www.youtube.com/watch?v=T2KjBiwYyBI&list=PL_cUvD4qzbkxZZyyuXa1xkWFhRB_No
 
 https://web.postman.co/
 
+https://tediousjs.github.io/node-mssql/
+https://youtu.be/Uvy_BlgwfLI
 
 # Things needed to talk to MySQL server / make this file work
 
@@ -19,6 +21,11 @@ npm install nodemon
 
 npm install cors
 	fixes something I think
-# Stuff we need to do in our app
 
-make database call at entry point of app
+# Process of adding to the api
+
+1. Figure out what information you need from the sql server
+2. Write a user-defined stored procedure in setup.sql
+3. Write a function in dboperations.js that executes the procedure
+4. Write a function in the corresponding route in the API that calls the function from dboperations.js
+5. Call the API wherever you need it in the webui
