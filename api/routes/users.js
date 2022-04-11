@@ -36,6 +36,14 @@ router.post('/create', (request, response) => {
 	// 	console.log('Request does not have a username and password. No new user created');
 	// }
 });
+router.post('/account', (request, response) => {
+	console.log('Request made to /users/account');
 
+	let accountName = {...request.body}
+
+	db.getAccountSummary(accountName).then(result => {
+		response.status(201).json(result);
+	})
+});
 
 module.exports = router;
