@@ -26,7 +26,7 @@ pipeline {
                     sh 'chmod +x /usr/local/bin/docker-compose'
                    
                     // Build the app.
-                    sh 'docker-compose up --detach'  
+                    sh 'sudo docker-compose up --detach'  
                 }
             }     
         }
