@@ -24,9 +24,9 @@ pipeline {
                     sh 'curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
                     //give docker permissions
                     sh 'chmod +x /usr/local/bin/docker-compose'
-                   sh 'whoami'
+                    
                     // Build the app.
-                    sh 'docker-compose up --detach'  
+                    sh 'docker-compose --version'  
                 }
             }     
         }
