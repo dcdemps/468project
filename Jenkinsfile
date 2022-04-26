@@ -27,7 +27,7 @@ pipeline {
                     
                     // Build the app.
                     sh 'docker-compose --version' 
-                    sh 'docker-compose up' 
+                    sh 'docker-compose up --detach' 
                 }
             }     
         }
