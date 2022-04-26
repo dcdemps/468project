@@ -20,6 +20,11 @@ pipeline {
                     sh 'mkdir -p ${GOPATH}/src/hello-world'
                     // Copy all files in our Jenkins workspace to our project directory.                
                     sh 'cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world'
+                    //install docker?
+                    sh 'sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+                    //give docker permissions
+                    sh 'sudo chmod +x /usr/local/bin/docker-compose'
+                   
                     // Build the app.
                     sh 'docker-compose up --detach'  
                 }
