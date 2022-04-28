@@ -30,26 +30,7 @@ pipeline {
                 }
             }     
         }
-        stage('Test') {
-            agent {
-                kubernetes {
-                    inheritFrom 'agent-template'
-                }
-            }
-            steps {
-                container('golang') {                 
-                    // Create our project directory.
-                    sh 'cd ${GOPATH}/src'
-                    sh 'mkdir -p ${GOPATH}/src/hello-world'
-                    // Copy all files in our Jenkins workspace to our project directory.                
-                    sh 'cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world'
-                    // Remove cached test results.
-                    sh 'go clean -cache'
-                    // Run Unit Tests.
-                    sh 'export GO111MODULE=auto; go test ./... -v -short'            
-                }
-            }
-        }
+        
         stage('Publish') {
             agent {
                 kubernetes {
