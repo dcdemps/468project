@@ -42,6 +42,9 @@ pipeline {
                 container('docker') {
                     sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
                     // sh 'docker compose build -t $DOCKER_REGISTRY:$BUILD_NUMBER .'
+                    sh 'pwd'
+                    sh 'ls -l'
+                    
                     sh 'docker-compose build .'
                     // image name needs to be set in the docker compose file
                     // https://stackoverflow.com/questions/53416685/docker-compose-tagging-and-pushing
