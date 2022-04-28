@@ -44,7 +44,9 @@ pipeline {
                     // sh 'docker compose build -t $DOCKER_REGISTRY:$BUILD_NUMBER .'
                     sh 'pwd'
                     sh 'ls -l'
-                    
+                    sh 'DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}'
+                    sh 'mkdir -p $DOCKER_CONFIG/cli-plugins'
+                    sh 'curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose'
                     sh 'docker -v'
                     sh 'docker-compose -v'
                     sh 'docker-compose build ./'
