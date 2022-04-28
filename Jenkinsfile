@@ -45,6 +45,7 @@ pipeline {
                     sh 'pwd'
                     sh 'ls -l'
                     
+                    sh 'docker -v'
                     sh 'docker-compose -v'
                     sh 'docker-compose build ./'
                     // image name needs to be set in the docker compose file
