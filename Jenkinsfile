@@ -8,14 +8,14 @@ pipeline {
         GOCACHE = "/tmp"
     }
     stages {
-        stage('Build') {
+       /* stage('Build') {
             agent {
                 kubernetes {
                     inheritFrom 'agent-template'
                 }
             }
             steps {
-                container('golang') {
+                //container('golang') {
                     // Create our project directory.
                     sh 'cd ${GOPATH}/src'
                     sh 'mkdir -p ${GOPATH}/src/hello-world'
@@ -28,10 +28,10 @@ pipeline {
                     // Build the app.
                     sh 'docker-compose --version' 
                     sh 'docker-compose up --detach' 
-                }
+                //}
             }     
         }
-        
+        */
         stage('Publish') {
             agent {
                 kubernetes {
