@@ -35,8 +35,11 @@ pipeline {
         }
         stage ('Deploy') {
             agent {
-                node {
-                    label 'deploy'
+                // node {
+                //     label 'deploy'
+                // }
+                kubernetes {
+                    inheritFrom 'agent-template'
                 }
             }
             steps {
