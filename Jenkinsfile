@@ -5,6 +5,7 @@ pipeline {
         docker_user = "ddemps14"
         docker_app = "468project"
         GOCACHE = "/tmp"
+        docker_token = "d0da111d-f632-46cf-9600-353f4ec7cff6"
     }
     stages {
        /* stage('Build') {
