@@ -29,7 +29,7 @@ pipeline {
                     sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
                     sh 'docker-compose build'
                     sh 'echo uploading docker images'
-                    sh 'docker-compose push'
+                    //sh 'docker-compose push'
                 }
             }
         }
