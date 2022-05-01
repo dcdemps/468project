@@ -8,35 +8,27 @@ pipeline {
         docker_token = "d0da111d-f632-46cf-9600-353f4ec7cff6"
     }
     stages {
-       /* stage('Build') {
-            agent {
-                kubernetes {
-                    inheritFrom 'agent-template'
+        container('docker-compose') {
+            stage('Build') {
+                agent {
+                    kubernetes {
+                        inheritFrom 'agent-template'
+                    }
                 }
-            }
-            steps {
-
-            }     
-        }
-        */
-        stage('Publish') {
-            agent {
-                kubernetes {
-                    inheritFrom 'agent-template'
-                }
-            }
-            steps{
-                container('docker-compose') {
+                steps {
+                    sh 'echo Building docker images'
                     sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
-                    // sh 'docker compose build -t $DOCKER_REGISTRY:$BUILD_NUMBER .'
-                    sh 'pwd'
-                    sh 'ls -l'
-                    
-                    sh 'docker-compose -v'
                     sh 'docker-compose build'
-                    // image name needs to be set in the docker compose file
-                    // https://stackoverflow.com/questions/53416685/docker-compose-tagging-and-pushing
-                    // sh 'docker compose push $DOCKER_REGISTRY:$BUILD_NUMBER'
+                }     
+            }
+            stage('Publish') {
+                agent {
+                    kubernetes {
+                        inheritFrom 'agent-template'
+                    }
+                }
+                steps{
+                    sh 'echo uploading docker images'
                     sh 'docker-compose push'
                 }
             }
