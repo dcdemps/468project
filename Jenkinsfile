@@ -45,7 +45,7 @@ pipeline {
                     sh 'pwd'
                     sh 'ls -l'
                     
-                    sh 'kubectl version'
+                    // sh 'kubectl version'
                     sh 'docker -v'
                     sh 'docker-compose -v'
                     sh 'docker-compose build ./'
