@@ -25,10 +25,11 @@ pipeline {
             }
             steps{
                 container('docker-compose') {
-                    sh 'echo Building docker images'
-                    sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
+                    echo 'Building docker images'
+                    echo '$DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
                     sh 'docker-compose build'
-                    sh 'echo Uploading docker images'
+
+                    echo 'Uploading docker images'
                     // TODO: add start up file that initiates the local repo
                     sh 'docker-compose push'
                 }
@@ -41,14 +42,10 @@ pipeline {
                 }
             }
             steps {
-                sshagent(credentials: ['cloudlab']) {
-                    sh "sed -i 's/DOCKER_USER/${docker_user}/g' deployment.yml"
-                    sh "sed -i 's/DOCKER_APP/${docker_app}/g' deployment.yml"
-                    sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' deployment.yml"
-                    sh 'scp -r -v -o StrictHostKeyChecking=no *.yml ddemps14@128.105.146.169:~/'
-                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/deployment.yml -n jenkins'
-                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/service.yml -n jenkins'                                        
-                }
+                echo 'replacing pods'
+                sh 'kubectl --namespace="rambank" replace --force -f rambank.yaml'
+                sh 'kubectl --namespace="rambank" replace --force -f rambank-service.yaml'
+                sh 'kubectl --namespace="rambank" replace --force -f rambank-persistentvolumeclaim.yaml'
             }
         }
     }
