@@ -17,7 +17,7 @@ pipeline {
         //     steps {
         //     }     
         // }
-        stage('Publish') {
+        stage('Build') {
             agent {
                 kubernetes {
                     inheritFrom 'agent-template'
@@ -28,31 +28,27 @@ pipeline {
                     sh 'echo Building docker images'
                     sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
                     sh 'docker-compose build'
-                    sh 'echo uploading docker images'
+                    sh 'echo Uploading docker images'
+                    // TODO: add start up file that initiates the local repo
                     sh 'docker-compose push'
                 }
             }
         }
         stage ('Deploy') {
             agent {
-                // node {
-                //     label 'deploy'
-                // }
-                kubernetes {
-                    inheritFrom 'agent-template'
+                node {
+                    label 'deploy'
                 }
             }
             steps {
-                container('docker-compose') {
+                sshagent(credentials: ['cloudlab']) {
+                    sh "sed -i 's/DOCKER_USER/${docker_user}/g' deployment.yml"
+                    sh "sed -i 's/DOCKER_APP/${docker_app}/g' deployment.yml"
+                    sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' deployment.yml"
+                    sh 'scp -r -v -o StrictHostKeyChecking=no *.yml ddemps14@128.105.146.169:~/'
+                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/deployment.yml -n jenkins'
+                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/service.yml -n jenkins'                                        
                 }
-                // sshagent(credentials: ['cloudlab']) {
-                //     sh "sed -i 's/DOCKER_USER/${docker_user}/g' deployment.yml"
-                //     sh "sed -i 's/DOCKER_APP/${docker_app}/g' deployment.yml"
-                //     sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' deployment.yml"
-                //     sh 'scp -r -v -o StrictHostKeyChecking=no *.yml ddemps14@128.105.146.169:~/'
-                //     sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/deployment.yml -n jenkins'
-                //     sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/service.yml -n jenkins'                                        
-                // }
             }
         }
     }
