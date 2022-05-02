@@ -26,6 +26,10 @@ spec:
           volumeMounts:
             - mountPath: /webui
               name: webui
+      volumes:
+      - name: webui
+        hostPath:
+          path: /webui
       restartPolicy: Always
       # volumes:
       #   - name: webui
@@ -63,6 +67,10 @@ spec:
           volumeMounts:
             - mountPath: /api
               name: api
+      volumes:
+      - name: api
+        hostPath:
+          path: /api
       restartPolicy: Always
       # volumes:
       #   - name: api
@@ -100,6 +108,10 @@ spec:
           volumeMounts:
             - mountPath: /var/opt/mssql/
               name: data
+      volumes:
+      - name: data
+        hostPath:
+          path: /data
       restartPolicy: Always
       # volumes:
       #   - name: data
