@@ -43,10 +43,10 @@ pipeline {
             }
             steps {
                 sshagent(credentials: ['cloudlab']) {
-                    sh 'scp -r -v -o StrictHostKeyChecking=no *.yaml ddemps14@http://128.105.146.169/:~/'
-                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@http://128.105.146.169/ kubectl apply -f /users/ddemps14/rambank.yaml -n jenkins'
-                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@http://128.105.146.169/ kubectl apply -f /users/ddemps14/rambank-service.yaml -n jenkins' 
-                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@http://128.105.146.169/ kubectl apply -f /users/ddemps14/rambank-persistentvolumeclaim.yaml -n jenkins'                                        
+                    sh 'scp -r -v -o StrictHostKeyChecking=no *.yaml ddemps14@128.105.146.169:~/'
+                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/rambank.yaml -n jenkins'
+                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/rambank-service.yaml -n jenkins' 
+                    sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/rambank-persistentvolumeclaim.yaml -n jenkins'                                        
                 }
             }
         }
