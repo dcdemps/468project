@@ -28,34 +28,32 @@ pipeline {
                     sh 'echo Building docker images'
                     sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
                     sh 'docker-compose build'
-                    // sh 'echo uploading docker images'
-                    //sh 'docker-compose push'
-                    sh 'echo running docker images'
-                    sh 'docker-compose up -d'
+                    sh 'echo uploading docker images'
+                    sh 'docker-compose push'
                 }
             }
         }
-        // stage ('Deploy') {
-        //     agent {
-        //         // node {
-        //         //     label 'deploy'
-        //         // }
-        //         kubernetes {
-        //             inheritFrom 'agent-template'
-        //         }
-        //     }
-        //     steps {
-        //         container('docker-compose') {
-        //         }
-        //         // sshagent(credentials: ['cloudlab']) {
-        //         //     sh "sed -i 's/DOCKER_USER/${docker_user}/g' deployment.yml"
-        //         //     sh "sed -i 's/DOCKER_APP/${docker_app}/g' deployment.yml"
-        //         //     sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' deployment.yml"
-        //         //     sh 'scp -r -v -o StrictHostKeyChecking=no *.yml ddemps14@128.105.146.169:~/'
-        //         //     sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/deployment.yml -n jenkins'
-        //         //     sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/service.yml -n jenkins'                                        
-        //         // }
-        //     }
-        // }
+        stage ('Deploy') {
+            agent {
+                // node {
+                //     label 'deploy'
+                // }
+                kubernetes {
+                    inheritFrom 'agent-template'
+                }
+            }
+            steps {
+                container('docker-compose') {
+                }
+                // sshagent(credentials: ['cloudlab']) {
+                //     sh "sed -i 's/DOCKER_USER/${docker_user}/g' deployment.yml"
+                //     sh "sed -i 's/DOCKER_APP/${docker_app}/g' deployment.yml"
+                //     sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' deployment.yml"
+                //     sh 'scp -r -v -o StrictHostKeyChecking=no *.yml ddemps14@128.105.146.169:~/'
+                //     sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/deployment.yml -n jenkins'
+                //     sh 'ssh -o StrictHostKeyChecking=no ddemps14@128.105.146.169 kubectl apply -f /users/ddemps14/service.yml -n jenkins'                                        
+                // }
+            }
+        }
     }
 }

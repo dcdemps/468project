@@ -5,7 +5,7 @@ services:
   webui:
     container_name: webui
     build: ./webui
-    image: ddemps14/webui
+    image: 127.0.0.1:30001/ddemps14/webui
     volumes:
       - type: volume
         source: webui
@@ -20,7 +20,7 @@ services:
   sql-server-db:
     container_name: sql-server-db
     build: ./sql
-    image: ddemps14/sql
+    image: 127.0.0.1:30001/ddemps14/sql
     ports:
       - 1433:1433
     environment:
@@ -34,7 +34,7 @@ services:
   api:
     container_name: api
     build: ./api
-    image: ddemps14/api
+    image: 127.0.0.1:30001/ddemps14/api
     ports:
       - 3001:3001
       - 9229:9229
