@@ -44,9 +44,9 @@ pipeline {
             steps {
                 sshagent(credentials: ['cloudlab2']) {
                     sh 'scp -r -v -o StrictHostKeyChecking=no *.yaml AustinH@128.105.146.169:~/'
+                    sh 'ssh -o StrictHostKeyChecking=no AustinH@128.105.146.169 kubectl apply -f /users/AustinH/rambank-persistentvolumeclaim.yaml -n jenkins'
                     sh 'ssh -o StrictHostKeyChecking=no AustinH@128.105.146.169 kubectl apply -f /users/AustinH/rambank.yaml -n jenkins'
-                    sh 'ssh -o StrictHostKeyChecking=no AustinH@128.105.146.169 kubectl apply -f /users/AustinH/rambank-service.yaml -n jenkins' 
-                    sh 'ssh -o StrictHostKeyChecking=no AustinH@128.105.146.169 kubectl apply -f /users/AustinH/rambank-persistentvolumeclaim.yaml -n jenkins'                                        
+                    sh 'ssh -o StrictHostKeyChecking=no AustinH@128.105.146.169 kubectl apply -f /users/AustinH/rambank-service.yaml -n jenkins'                                         
                 }
             }
         }
