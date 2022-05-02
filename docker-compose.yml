@@ -5,7 +5,6 @@ services:
   webui:
     container_name: webui
     build: ./webui
-    image: 127.0.0.1:30001/ddemps14/webui
     volumes:
       - type: bind
         source: /webui
@@ -16,11 +15,11 @@ services:
       - CHOKIDAR_USEPOLLING=true
     stdin_open: true
     tty: true
+    image: 127.0.0.1:30001/ddemps14/webui
 
   sql-server-db:
     container_name: sql-server-db
     build: ./sql
-    image: 127.0.0.1:30001/ddemps14/sql
     ports:
       - 1433:1433
     environment:
@@ -30,11 +29,11 @@ services:
       - type: bind
         source: /sql/data
         target: /var/opt/mssql/
+    image: 127.0.0.1:30001/ddemps14/sql
 
   api:
     container_name: api
     build: ./api
-    image: 127.0.0.1:30001/ddemps14/api
     ports:
       - 3001:3001
       - 9229:9229
@@ -46,7 +45,8 @@ services:
       - node
       - "--inspect=0.0.0.0"
       - "app.js" 
-volumes:
-  data:
-  webui:
-  api:
+    image: 127.0.0.1:30001/ddemps14/api
+# volumes:
+#   data:
+#   webui:
+#   api:
