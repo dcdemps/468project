@@ -7,8 +7,8 @@ services:
     build: ./webui
     image: 127.0.0.1:30001/ddemps14/webui
     volumes:
-      - type: volume
-        source: webui
+      - type: bind
+        source: /webui
         target: /webui
     ports:
       - 3000:3000
@@ -27,8 +27,8 @@ services:
       ACCEPT_EULA: 'Y'
       SA_PASSWORD: 'password@1'
     volumes:
-      - type: volume
-        source: data
+      - type: bind
+        source: /sql/data
         target: /var/opt/mssql/
 
   api:
@@ -39,8 +39,8 @@ services:
       - 3001:3001
       - 9229:9229
     volumes:
-      - type: volume
-        source: api
+      - type: bind
+        source: /api
         target: /api
     command:
       - node
