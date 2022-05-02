@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      labels:
+        app: webui
+    spec:
+      containers:
+        - name: webui
+          image: 127.0.0.1:30001/ddemps14/webui
+          env:
+            - name: CHOKIDAR_USEPOLLING
+              value: "true"
+          ports:
+            - containerPort: 3000
+          resources: {}
+          stdin: true
+          tty: true
+          volumeMounts:
+            - mountPath: /webui
+              name: webui
+      restartPolicy: Always
+      volumes:
+        - name: webui
+          persistentVolumeClaim:
+            claimName: webui
+status: {}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: 127.0.0.1:30001/ddemps14/api
+          ports:
+            - containerPort: 3001
+            - containerPort: 9229
+          args:
+            - node
+            - --inspect=0.0.0.0
+            - app.js
+          resources: {}
+          volumeMounts:
+            - mountPath: /api
+              name: api
+      restartPolicy: Always
+      volumes:
+        - name: api
+          persistentVolumeClaim:
+            claimName: api
+status: {}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-server-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sql-server-db
+  template:
+    metadata:
+      labels:
+        app: sql-server-db
+    spec:
+      containers:
+        - name: sql-server-db
+          image: 127.0.0.1:30001/ddemps14/sql
+          ports:
+            - containerPort: 1433
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: SA_PASSWORD
+              value: password@1
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/opt/mssql/
+              name: data
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+status: {}
