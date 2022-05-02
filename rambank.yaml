@@ -27,10 +27,10 @@ spec:
             - mountPath: /webui
               name: webui
       restartPolicy: Always
-      volumes:
-        - name: webui
-          persistentVolumeClaim:
-            claimName: webui
+      # volumes:
+      #   - name: webui
+      #     persistentVolumeClaim:
+      #       claimName: webui
 status: {}
 
 ---
@@ -64,10 +64,10 @@ spec:
             - mountPath: /api
               name: api
       restartPolicy: Always
-      volumes:
-        - name: api
-          persistentVolumeClaim:
-            claimName: api
+      # volumes:
+      #   - name: api
+      #     persistentVolumeClaim:
+      #       claimName: api
 status: {}
 
 ---
@@ -101,8 +101,8 @@ spec:
             - mountPath: /var/opt/mssql/
               name: data
       restartPolicy: Always
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
+      # volumes:
+      #   - name: data
+      #     persistentVolumeClaim:
+      #       claimName: data
 status: {}
