@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: webui
+  name: webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: webui
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.1 (a9d05d509)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: webui
+    spec:
+      containers:
+        - env:
+            - name: CHOKIDAR_USEPOLLING
+              value: "true"
+          image: 127.0.0.1:30001/ddemps14/webui
+          name: webui
+          ports:
+            - containerPort: 3000
+          resources: {}
+          stdin: true
+          tty: true
+          volumeMounts:
+            - mountPath: /webui
+              name: webui
+      restartPolicy: Always
+      volumes:
+        - name: webui
+          persistentVolumeClaim:
+            claimName: webui
+status: {}
