@@ -12,37 +12,37 @@ spec:
 status:
   loadBalancer: {}
 
----
+# ---
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: api
-spec:
-  ports:
-    - name: "3001"
-      port: 3001
-      targetPort: 3001
-    - name: "9229"
-      port: 9229
-      targetPort: 9229
-  selector:
-    app: api
-status:
-  loadBalancer: {}
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: api
+# spec:
+#   ports:
+#     - name: "3001"
+#       port: 3001
+#       targetPort: 3001
+#     - name: "9229"
+#       port: 9229
+#       targetPort: 9229
+#   selector:
+#     app: api
+# status:
+#   loadBalancer: {}
 
----
+# ---
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: sql-server-db
-spec:
-  ports:
-    - name: "1433"
-      port: 1433
-      targetPort: 1433
-  selector:
-    app: sql-server-db
-status:
-  loadBalancer: {}
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: sql-server-db
+# spec:
+#   ports:
+#     - name: "1433"
+#       port: 1433
+#       targetPort: 1433
+#   selector:
+#     app: sql-server-db
+# status:
+#   loadBalancer: {}
