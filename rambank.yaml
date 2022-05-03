@@ -15,17 +15,12 @@ spec:
       containers:
         - name: webui
           image: 127.0.0.1:30001/ddemps14/webui
-          env:
-            - name: CHOKIDAR_USEPOLLING
-              value: "true"
           ports:
             - containerPort: 3000
           resources: {}
-          stdin: true
-          tty: true
-          volumeMounts:
-            - mountPath: /webui
-              name: webui
+          # volumeMounts:
+          #   - mountPath: /webui
+          #     name: webui
       volumes:
       - name: webui
         hostPath:
