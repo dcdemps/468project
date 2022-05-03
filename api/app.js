@@ -7,9 +7,7 @@ const app = express();
 
 // Need to use when using json
 app.use(express.json());
-app.use(cors({
-	origin: '*'
-}));
+app.use(cors());
 
 
 app.get('/', function(request, response) {

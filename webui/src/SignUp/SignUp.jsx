@@ -34,7 +34,10 @@ export default class SignUp extends React.Component {
   async signUpUser(credentials) {
     await fetch('http://localhost:3001/users/create', {
       method: 'POST',
-      headers: { "Content-Type": "application/json" }, 
+      headers: { 
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': 'http://localhost:*'
+      }, 
       body: JSON.stringify(credentials)
     })
     .then(data => data.json())
