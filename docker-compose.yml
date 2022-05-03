@@ -47,12 +47,6 @@ services:
       - "app.js" 
     image: 127.0.0.1:30001/ddemps14/api
 
-  nginx:
-    container_name: nginx
-    build: ./nginx
-    ports:
-      - 80:80
-    image: 127.0.0.1:30001/ddemps14/nginx
 
 # volumes:
 #   data:

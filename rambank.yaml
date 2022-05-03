@@ -37,77 +37,41 @@ status: {}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: api
   template:
     metadata:
       labels:
-        app: nginx
+        app: api
     spec:
       containers:
-        - name: nginx
-          image: 127.0.0.1:30001/ddemps14/nginx
+        - name: api
+          image: 127.0.0.1:30001/ddemps14/api
           ports:
-            - containerPort: 80
+            - containerPort: 3001
+            - containerPort: 9229
+          args:
+            - node
+            - --inspect=0.0.0.0
+            - app.js
           resources: {}
-          # volumeMounts:
-          #   - mountPath: /nginx
-          #     name: nginx
+          volumeMounts:
+            - mountPath: /api
+              name: api
       volumes:
-      - name: nginx
+      - name: api
         hostPath:
-          path: /nginx
+          path: /api
       restartPolicy: Always
       # volumes:
-      #   - name: nginx
+      #   - name: api
       #     persistentVolumeClaim:
-      #       claimName: nginx
+      #       claimName: api
 status: {}
-
-# ---
-
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: api
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: api
-#   template:
-#     metadata:
-#       labels:
-#         app: api
-#     spec:
-#       containers:
-#         - name: api
-#           image: 127.0.0.1:30001/ddemps14/api
-#           ports:
-#             - containerPort: 3001
-#             - containerPort: 9229
-#           args:
-#             - node
-#             - --inspect=0.0.0.0
-#             - app.js
-#           resources: {}
-#           volumeMounts:
-#             - mountPath: /api
-#               name: api
-#       volumes:
-#       - name: api
-#         hostPath:
-#           path: /api
-#       restartPolicy: Always
-#       # volumes:
-#       #   - name: api
-#       #     persistentVolumeClaim:
-#       #       claimName: api
-# status: {}
 
 # ---
 
