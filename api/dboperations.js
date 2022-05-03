@@ -52,31 +52,31 @@ async function createUser(credentials) {
 	}
 }
 
-async function getAccountSummary(accountName) {
-	let {accountName} =  {...accountName};
-	try {
-		console.log('Connection Opening...');
+// async function getAccountSummary(accountName) {
+// 	let {accountName} =  {...accountName};
+// 	try {
+// 		console.log('Connection Opening...');
 
-		let pool = await sql.connect(config);
+// 		let pool = await sql.connect(config);
 		
-		const result = await pool.request()
-		.input('accountName',sql.NVarChar, accountName)
-		.query('SELECT username, checkingBalance, savingsBalance FROM accountInformation WHERE username = @accountName');
+// 		const result = await pool.request()
+// 		.input('accountName',sql.NVarChar, accountName)
+// 		.query('SELECT username, checkingBalance, savingsBalance FROM accountInformation WHERE username = @accountName');
 
-		console.log(result.recordsets);
+// 		console.log(result.recordsets);
 
-		await sql.close();
+// 		await sql.close();
 
-		console.log('Connection Closed');
-		return result.recordsets;
+// 		console.log('Connection Closed');
+// 		return result.recordsets;
 
-	} catch (error) {
-		console.log(error);
-	}
-}
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
 
 module.exports = {
 	getAll : getAll,
 	createUser : createUser,
-	getAccountSummary:getAccountSummary
+	// getAccountSummary:getAccountSummary
 }
