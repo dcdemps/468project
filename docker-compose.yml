@@ -46,6 +46,13 @@ services:
       - "--inspect=0.0.0.0"
       - "app.js" 
     image: 127.0.0.1:30001/ddemps14/api
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - 80:80
+
 # volumes:
 #   data:
 #   webui:
