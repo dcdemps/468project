@@ -10,4 +10,7 @@ RUN npm install -g nodemon && npm install
 
 COPY . /
 
-CMD ["node"]
+EXPOSE 3001
+EXPOSE 9229
+
+CMD ["node", "app.js"]
