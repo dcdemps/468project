@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const db = require('../dboperations');
+const cors = require('cors');
 const router = Router();
 
 router.use((request, response, next) => {
@@ -10,7 +11,7 @@ router.use((request, response, next) => {
 
 
 // TODO: this needs to be rewritten using mssql
-router.post('/create', (request, response) => {
+router.post('/create', cors(), (request, response) => {
 
 	console.log('Request made to /users/create');
 

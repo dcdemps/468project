@@ -36,7 +36,7 @@ export default class SignUp extends React.Component {
       method: 'POST',
       headers: { 
         "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': 'http://localhost:*'
+        'Access-Control-Allow-Origin': '*'
       }, 
       body: JSON.stringify(credentials)
     })
