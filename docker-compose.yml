@@ -1,62 +1,34 @@
-version: '3.7'
 
+
+
+# indicating which version of Docker-compose we wish to use
+version: "3.7"
+
+# we will be creating these services
 services:
-
-  webui:
-    container_name: webui
-    build: ./webui
-    volumes:
-      - type: bind
-        source: /webui
-        target: /webui
-    ports:
-      - 3000:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    stdin_open: true
-    tty: true
-    image: 127.0.0.1:30001/ddemps14/webui
-
-  sql-server-db:
-    container_name: sql-server-db
-    build: ./sql
-    ports:
-      - 1433:1433
-    environment:
-      ACCEPT_EULA: 'Y'
-      SA_PASSWORD: 'password@1'
-    volumes:
-      - type: bind
-        source: /sql/data
-        target: /var/opt/mssql/
-    image: 127.0.0.1:30001/ddemps14/sql
-
   api:
-    container_name: api
     build: ./api
+    container_name: api
     ports:
-      - 3001:3001
-      - 9229:9229
-    volumes:
-      - type: bind
-        source: /api
-        target: /api
-    command: node app.js
-    image: 127.0.0.1:30001/ddemps14/api
+      - "3001:3001"
 
-  nginx:
+  nginx: 
+    build: ./webui
     container_name: nginx
-    build: ./nginx
     ports:
-      - 80:80
-    volumes:
-      - type: bind
-        source: /nginx
-        target: /nginx
-    command: node app.js
-    image: 127.0.0.1:30001/ddemps14/nginx
+      - "8080:8080"
 
-# volumes:
-#   data:
-#   webui:
-#   api:
+
+#   sql-server-db:
+#     container_name: sql-server-db
+#     build: ./sql
+#     ports:
+#       - 1433:1433
+#     environment:
+#       ACCEPT_EULA: 'Y'
+#       SA_PASSWORD: 'password@1'
+#     volumes:
+#       - type: bind
+#         source: /sql/data
+#         target: /var/opt/mssql/
+#     image: 127.0.0.1:30001/ddemps14/sql

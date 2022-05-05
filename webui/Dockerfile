@@ -1,16 +1,27 @@
-FROM node:17.6-alpine3.14
+FROM node as build-stage
 
 WORKDIR /webui
 
-ENV PATH /webui/node_modules/.bin:$PATH
-
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
 
 RUN npm install
 
-COPY . ./
+COPY src ./src
+COPY public ./public
+COPY react.conf ./
 
-EXPOSE 3000
+RUN npm run build
 
-CMD ["npm", "start"]
+
+
+
+FROM nginx:1.15
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY --from=build-stage /webui/react.conf /etc/nginx/conf.d/
+COPY --from=build-stage /webui/build /usr/share/nginx/html
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]

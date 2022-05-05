@@ -6,31 +6,19 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webui
+      app: react
   template:
     metadata:
       labels:
-        app: webui
+        app: react
     spec:
       containers:
         - name: webui
           image: 127.0.0.1:30001/ddemps14/webui
+          imagePullPolicy: "Always"
           ports:
-            - containerPort: 3000
-          resources: {}
-          # volumeMounts:
-          #   - mountPath: /webui
-          #     name: webui
-      volumes:
-      - name: webui
-        hostPath:
-          path: /webui
+            - containerPort: 8080
       restartPolicy: Always
-      # volumes:
-      #   - name: webui
-      #     persistentVolumeClaim:
-      #       claimName: webui
-status: {}
 
 ---
 
@@ -42,52 +30,48 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api
+      component: api
   template:
     metadata:
       labels:
-        app: api
+        component: api
     spec:
       containers:
         - name: api
           image: 127.0.0.1:30001/ddemps14/api
+          imagePullPolicy: "Always"
           ports:
             - containerPort: 3001
-            - containerPort: 9229
+            # - containerPort: 9229
       restartPolicy: Always
-      # volumes:
-      #   - name: api
-      #     persistentVolumeClaim:
-      #       claimName: api
-status: {}
 
----
+# ---
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-        - name: nginx
-          image: 127.0.0.1:30001/ddemps14/nginx
-          ports:
-            - containerPort: 80
-      restartPolicy: Always
-      # volumes:
-      #   - name: nginx
-      #     persistentVolumeClaim:
-      #       claimName: nginx
-status: {}
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nginx
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: nginx
+#   template:
+#     metadata:
+#       labels:
+#         app: nginx
+#     spec:
+#       containers:
+#         - name: nginx
+#           image: 127.0.0.1:30001/ddemps14/nginx
+#           ports:
+#             - containerPort: 80
+#       restartPolicy: Always
+#       # volumes:
+#       #   - name: nginx
+#       #     persistentVolumeClaim:
+#       #       claimName: nginx
+# status: {}
 
 # ---
 
