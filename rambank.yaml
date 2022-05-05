@@ -61,6 +61,34 @@ spec:
       #       claimName: api
 status: {}
 
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: 127.0.0.1:30001/ddemps14/nginx
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+      # volumes:
+      #   - name: nginx
+      #     persistentVolumeClaim:
+      #       claimName: nginx
+status: {}
+
 # ---
 
 # apiVersion: apps/v1
