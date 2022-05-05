@@ -22,7 +22,7 @@ spec:
   ports:
     - port: 3001
       targetPort: 3001
-  selector:
-    app: api
     # - port: 9229
     #   targetPort: 9229
+  selector:
+    app: api
