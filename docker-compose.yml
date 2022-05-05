@@ -9,14 +9,14 @@ services:
   api:
     build: ./api
     container_name: api
-    image: ddemps14/api
+    image: 127.0.0.1:30001/ddemps14/api
     ports:
       - "3001:3001"
 
   nginx: 
     build: ./webui
     container_name: webui
-    image: ddemps14/webui
+    image: 127.0.0.1:30001/ddemps14/webui
     ports:
       - "8081:8081"
 
