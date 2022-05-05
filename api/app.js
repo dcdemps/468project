@@ -11,10 +11,9 @@ app.use(cors());
 
 
 app.get('/', function(request, response) {
-	console.log('pogging');
-	// db.getAll().then(result => {
-	// 	response.json(result)
-	// });
+	db.getAll().then(result => {
+		response.json(result)
+	});
 })
 
 app.use('/login', (request, response) => {
