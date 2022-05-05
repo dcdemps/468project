@@ -3,13 +3,14 @@ kind: Service
 metadata:
   name: ui
 spec:
-  type: loadBalancer
+  type: NodePort
   selector:
     app: webui
     tier: ui
   ports:
     - port: 8080
       targetPort: 8080
+      NodePort: 30080
 
 ---
 
