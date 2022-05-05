@@ -19,19 +19,15 @@ export default class Login extends React.Component {
   }
 
   async loginUser(credentials) {
-    // return fetch('http://128.105.146.169:8081/api/login', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(credentials)
-    // })
-    // .then(data => data.json())
-
-    return fetch('http://128.105.146.169:30080/api/', {
-      method: 'GET'
-    }).then(data => data.json())
+    return fetch('http://128.105.146.169:8081/api/login', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+    .then(data => data.json())
   }
 
   async handleSubmit(event) {
