@@ -17,7 +17,14 @@ spec:
           image: 127.0.0.1:30001/ddemps14/webui
           imagePullPolicy: "Always"
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
+      
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 8081
+        initialDelaySeconds: 30
+        periodSeconds: 5
       restartPolicy: Always
 
 ---
