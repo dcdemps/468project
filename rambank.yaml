@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: react
+      app: webui
   template:
     metadata:
       labels:
-        app: react
+        app: webui
     spec:
       containers:
         - name: webui
