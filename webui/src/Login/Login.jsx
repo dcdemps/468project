@@ -19,7 +19,7 @@ export default class Login extends React.Component {
   }
 
   async loginUser(credentials) {
-    return fetch('http://localhost:3001/api/login', {
+    return fetch('http://localhost:8081/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
