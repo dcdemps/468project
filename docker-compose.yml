@@ -13,7 +13,7 @@ services:
     ports:
       - "3001:3001"
 
-  nginx: 
+  webui: 
     build: ./webui
     container_name: webui
     image: 127.0.0.1:30001/ddemps14/webui
