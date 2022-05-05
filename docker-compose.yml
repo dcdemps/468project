@@ -9,14 +9,16 @@ services:
   api:
     build: ./api
     container_name: api
+    image: ddemps14/api
     ports:
       - "3001:3001"
 
   nginx: 
     build: ./webui
-    container_name: nginx
+    container_name: webui
+    image: ddemps14/webui
     ports:
-      - "8080:8080"
+      - "8081:8081"
 
 
 #   sql-server-db:

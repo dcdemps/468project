@@ -22,6 +22,6 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY --from=build-stage /webui/react.conf /etc/nginx/conf.d/
 COPY --from=build-stage /webui/build /usr/share/nginx/html
 
-EXPOSE 8080
+EXPOSE 8081
 
 CMD ["nginx", "-g", "daemon off;"]
